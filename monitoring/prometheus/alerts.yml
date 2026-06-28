@@ -1,0 +1,51 @@
+groups:
+  - name: healthai-availability
+    rules:
+      # Un service ne répond plus au scraping depuis > 1 min
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.job }} indisponible"
+          description: "La cible {{ $labels.instance }} ({{ $labels.service }}) ne répond plus depuis plus d'une minute."
+
+  - name: healthai-performance
+    rules:
+      # Taux d'erreurs 5xx élevé sur le backend
+      - alert: BackendHighErrorRate
+        expr: |
+          sum(rate(http_requests_total{status_code=~"5.."}[5m]))
+            / sum(rate(http_requests_total[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Taux d'erreurs 5xx élevé sur le backend"
+          description: "Plus de 5% des requêtes backend renvoient une erreur 5xx (fenêtre 5 min)."
+
+      # Latence p95 backend dégradée
+      - alert: BackendHighLatency
+        expr: |
+          histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Latence p95 backend élevée"
+          description: "La latence p95 du backend dépasse 2s depuis 5 min."
+
+  - name: healthai-resources
+    rules:
+      # Conteneur consommant trop de mémoire (> 90% de sa limite)
+      - alert: ContainerHighMemory
+        expr: |
+          (container_memory_usage_bytes{name!=""} / container_spec_memory_limit_bytes{name!=""} > 0.9)
+          and (container_spec_memory_limit_bytes{name!=""} > 0)
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Mémoire conteneur élevée ({{ $labels.name }})"
+          description: "Le conteneur {{ $labels.name }} utilise plus de 90% de sa limite mémoire depuis 5 min."

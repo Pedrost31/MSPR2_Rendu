@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "HealthAI Coach",
+    "slug": "healthai-coach",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "healthai",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#10b981"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "L'application utilise l'appareil photo pour analyser vos repas par IA.",
+        "NSPhotoLibraryUsageDescription": "L'application accède à vos photos pour analyser vos repas par IA."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "L'application accède à vos photos pour analyser vos repas par IA.",
+          "cameraPermission": "L'application utilise l'appareil photo pour analyser vos repas par IA."
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "http://192.168.1.6:5000/api"
+    }
+  }
+}
