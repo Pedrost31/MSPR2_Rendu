@@ -24,7 +24,7 @@ import { Toaster } from 'react-hot-toast';
     } else {
       await signup({ username, email, password });
     }
-  } catch (e) {
+  } catch {
     // erreur déjà gérée par toast dans context
   } finally {
     setIsSubmitting(false);

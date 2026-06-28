@@ -17,6 +17,9 @@ logique industrielle : **documentés, reproductibles et exploitables** par d'aut
 | 7 | **Tests automatisés** + rapport de couverture | [`07_tests_et_couverture.md`](./07_tests_et_couverture.md) |
 | 8 | **Conduite du changement** + accessibilité / adoption | [`08_conduite_du_changement.md`](./08_conduite_du_changement.md) |
 | 9 | **Maquettes d'interface responsive** | [`09_maquettes_responsive.md`](./09_maquettes_responsive.md) |
+| 10 | **Pipeline CI/CD** (build, tests, analyse, déploiement) | [`10_cicd_pipeline.md`](./10_cicd_pipeline.md) |
+| 11 | **Conteneurisation & images Docker** documentées | [`11_conteneurisation_images.md`](./11_conteneurisation_images.md) |
+| 12 | **Supervision / monitoring** + données collectées | [`12_supervision_monitoring.md`](./12_supervision_monitoring.md) |
 
 Outils reproductibles fournis :
 - [`openapi.json`](./openapi.json) — spec OpenAPI 3.0 régénérable (`npm run openapi:export` côté backend).

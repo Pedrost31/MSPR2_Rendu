@@ -1,0 +1,31 @@
+# Configuration minimale d'Alertmanager pour la démonstration.
+# Les alertes sont regroupées et visibles dans l'UI (http://localhost:9093).
+# Un receiver webhook fictif est fourni : remplacer l'URL pour brancher
+# Slack / e-mail / Teams en production.
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: default
+  group_by: ["alertname", "service"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+  routes:
+    - matchers:
+        - severity = "critical"
+      receiver: default
+      repeat_interval: 1h
+
+receivers:
+  - name: default
+    # Receiver de démonstration : journalise les alertes (aucune sortie externe).
+    # Pour activer Slack :
+    # slack_configs:
+    #   - api_url: https://hooks.slack.com/services/XXX/YYY/ZZZ
+    #     channel: "#alerts"
+
+inhibit_rules:
+  - source_matchers: [severity = "critical"]
+    target_matchers: [severity = "warning"]
+    equal: ["service"]

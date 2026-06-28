@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>HealthAI Coach — Synthèse des livrables</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #1e293b; font-size: 10.5pt; line-height: 1.5; margin: 0;
+  }
+  h1, h2, h3 { color: #065f46; line-height: 1.2; }
+  h1 { font-size: 19pt; margin: 0 0 4px; }
+  h2 {
+    font-size: 14pt; margin: 0 0 8px; padding-bottom: 5px;
+    border-bottom: 2.5px solid #10b981;
+  }
+  h3 { font-size: 11.5pt; margin: 14px 0 4px; color: #0f766e; }
+  p { margin: 6px 0; }
+  ul { margin: 6px 0; padding-left: 18px; }
+  li { margin: 2px 0; }
+  code {
+    background: #f1f5f9; padding: 1px 4px; border-radius: 3px;
+    font-family: Consolas, monospace; font-size: 9pt; color: #be123c;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9pt; }
+  th, td { border: 1px solid #cbd5e1; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #ecfdf5; color: #065f46; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .section { page-break-before: always; }
+  .muted { color: #64748b; }
+  .pill {
+    display: inline-block; background: #d1fae5; color: #065f46;
+    border-radius: 10px; padding: 1px 8px; font-size: 8.5pt; font-weight: 600;
+  }
+  .cover {
+    height: 245mm; display: flex; flex-direction: column;
+    justify-content: center; text-align: center;
+  }
+  .cover .logo {
+    width: 70px; height: 70px; margin: 0 auto 18px; border-radius: 18px;
+    background: #10b981; color: #fff; font-size: 38px; line-height: 70px; font-weight: bold;
+  }
+  .cover h1 { font-size: 30pt; border: 0; }
+  .cover .sub { font-size: 13pt; color: #475569; margin-top: 8px; }
+  .cover .meta { margin-top: 40px; font-size: 10pt; color: #64748b; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+  .box {
+    border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 10px; margin: 6px 0;
+    background: #f8fafc;
+  }
+  .small { font-size: 9pt; }
+  .nobreak { page-break-inside: avoid; }
+  pre {
+    background: #f1f5f9; border-radius: 6px; padding: 8px; font-size: 8.5pt;
+    overflow: hidden; white-space: pre-wrap; border: 1px solid #e2e8f0;
+  }
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="cover">
+  <div class="logo">H</div>
+  <h1>HealthAI Coach</h1>
+  <div class="sub">Synthèse des livrables — Mission MSPR</div>
+  <div class="sub muted">Application de suivi santé enrichie par intelligence artificielle</div>
+  <div class="meta">
+    Document de synthèse (≈10 pages)<br>
+    Frontend React · Backend Express · Microservices IA FastAPI · PostgreSQL + MongoDB<br>
+    Juin 2026
+  </div>
+</div>
+
+<!-- SOMMAIRE -->
+<div class="section">
+  <h2>Sommaire</h2>
+  <table>
+    <tr><th style="width:32px">#</th><th>Livrable</th><th style="width:90px">Page</th></tr>
+    <tr><td>1</td><td>Architecture, choix des algorithmes & APIs, benchmark frontend</td><td>3</td></tr>
+    <tr><td>2</td><td>Ergonomie & accessibilité (RGAA / WCAG)</td><td>4</td></tr>
+    <tr><td>3</td><td>Métriques de performance des modèles IA</td><td>5</td></tr>
+    <tr><td>4</td><td>API IA & documentation OpenAPI</td><td>6</td></tr>
+    <tr><td>5</td><td>Moteur de recommandation (microservices + NoSQL)</td><td>7</td></tr>
+    <tr><td>6</td><td>Modèle de données relationnel & adaptations</td><td>8</td></tr>
+    <tr><td>7</td><td>Tests automatisés & couverture</td><td>9</td></tr>
+    <tr><td>8</td><td>Conduite du changement & accessibilité</td><td>9</td></tr>
+    <tr><td>9</td><td>Maquettes d'interface responsive</td><td>10</td></tr>
+  </table>
+
+  <h3>Vue d'ensemble</h3>
+  <p><strong>HealthAI Coach</strong> est une application de suivi santé (nutrition + activité)
+  enrichie de recommandations par IA, organisée en architecture 3-tiers + microservices.</p>
+  <table>
+    <tr><th>Couche</th><th>Technologies</th><th>Port</th></tr>
+    <tr><td>Frontend</td><td>React 19, Vite 8, TypeScript, Tailwind CSS 4, Axios, React Router 7, Recharts</td><td>5173</td></tr>
+    <tr><td>Backend</td><td>Node.js, Express 4, TypeScript, Prisma 5, JWT, Zod, Swagger</td><td>5000</td></tr>
+    <tr><td>Base relationnelle</td><td>PostgreSQL 16 (Docker)</td><td>55432</td></tr>
+    <tr><td>Base NoSQL</td><td>MongoDB 7 (Docker)</td><td>27017</td></tr>
+    <tr><td>Microservices IA</td><td>Python 3.12, FastAPI, Ollama (LLaVA + Llama 3.2)</td><td>8001–8004</td></tr>
+  </table>
+  <pre>Frontend React ──REST/JSON+JWT──▶ Backend Express ──┬─▶ PostgreSQL (données métier)
+                                                    ├─▶ MongoDB (recommandations + logs IA)
+                                                    └─▶ 4 microservices IA (Ollama local)</pre>
+</div>
+
+<!-- 1. ARCHITECTURE -->
+<div class="section">
+  <h2>1. Architecture, algorithmes & benchmark frontend</h2>
+
+  <h3>Découpage & justification</h3>
+  <ul>
+    <li>Le <strong>backend agit en passerelle</strong> (auth, quotas, validation, journalisation) et délègue l'inférence aux microservices : la charge IA (lente, CPU/GPU) est isolée du chemin critique.</li>
+    <li><strong>Microservices IA indépendants</strong> : déploiement & scalabilité séparés, tolérance aux pannes, cycles de vie distincts.</li>
+    <li><strong>Deux bases</strong> : PostgreSQL pour les données structurées/transactionnelles, MongoDB pour les sorties IA semi-structurées.</li>
+  </ul>
+
+  <h3>Choix des algorithmes IA</h3>
+  <table>
+    <tr><th>Capacité</th><th>Modèle / algorithme</th><th>Justification</th></tr>
+    <tr><td>Reconnaissance d'image</td><td>LLaVA (vision, Ollama)</td><td>Open source, local, gratuit, souveraineté des données.</td></tr>
+    <tr><td>Recettes / diète / sport</td><td>Llama 3.2 (Ollama)</td><td>LLM open source performant en français, sortie JSON.</td></tr>
+    <tr><td>Besoins caloriques</td><td>Mifflin-St Jeor (déterministe)</td><td>Formule de référence, résultat exact & reproductible (aucun LLM).</td></tr>
+    <tr><td>Enrichissement nutritionnel</td><td>Open Food Facts + USDA</td><td>Bases ouvertes, fiabilisent le chiffre calorique.</td></tr>
+  </table>
+  <p class="small"><strong>Calcul calorique :</strong> BMR (Mifflin-St Jeor) → TDEE (× facteur d'activité 1,2–1,9)
+  → calories cibles (−500 perte / 0 maintien / +300 prise, plancher 1200) → macros (protéines 1,6–2,0 g/kg,
+  lipides 0,9 g/kg, glucides = reste). La partie chiffrée est <strong>vérifiable</strong>, le LLM ne gère que le rédactionnel.</p>
+
+  <h3>Benchmark frontend (choix retenus)</h3>
+  <table>
+    <tr><th>Dimension</th><th>Retenu</th><th>Alternatives écartées</th><th>Pourquoi</th></tr>
+    <tr><td>Framework UI</td><td><strong>React 19</strong></td><td>Vue, Angular, Svelte</td><td>Écosystème le plus large, recrutement/reprise facilités, TS mature.</td></tr>
+    <tr><td>Build</td><td><strong>Vite 8</strong></td><td>CRA, Webpack, Next.js</td><td>HMR instantané, config minimale ; SSR non requis (app authentifiée).</td></tr>
+    <tr><td>Styling</td><td><strong>Tailwind CSS 4</strong></td><td>MUI, styled-components</td><td>Design system cohérent, dark mode natif, bundle léger (purge).</td></tr>
+  </table>
+  <p class="small">Compléments : Axios (intercepteurs JWT + refresh auto), React Router 7, Recharts (graphes),
+  react-hot-toast (notifications), lucide-react (icônes).</p>
+</div>
+
+<!-- 2. ERGONOMIE & ACCESSIBILITE -->
+<div class="section">
+  <h2>2. Ergonomie & accessibilité</h2>
+
+  <h3>Principes d'ergonomie (heuristiques de Nielsen, mobile-first)</h3>
+  <ul>
+    <li><strong>État du système visible</strong> : spinners IA, toasts succès/erreur, barres de progression.</li>
+    <li><strong>Langage métier</strong> en français, vocabulaire simple, emojis de repas.</li>
+    <li><strong>Contrôle utilisateur</strong> : boutons Annuler, confirmations avant suppression.</li>
+    <li><strong>Cohérence</strong> : composants UI réutilisables (Button, Input, Select, Card…).</li>
+    <li><strong>Prévention des erreurs</strong> : validations min/max, required, bornage calorique.</li>
+  </ul>
+  <p><strong>Navigation responsive :</strong> barre basse fixe sur mobile (&lt;1024 px), barre latérale sur desktop (≥1024 px), grilles adaptatives 1→2 colonnes.</p>
+
+  <h3>Accessibilité — cible WCAG 2.1 AA / RGAA 4</h3>
+  <p class="small"><strong>En place :</strong> contrastes Slate/Emerald + thème sombre, reflow sans scroll horizontal,
+  navigation clavier (éléments natifs), focus visible, HTML sémantique, <code>&lt;html lang="fr"&gt;</code>.</p>
+  <table>
+    <tr><th>Écart constaté</th><th>Critère</th><th>Action (plan AA)</th></tr>
+    <tr><td>Boutons icône sans libellé</td><td>1.1.1</td><td>Ajouter <code>aria-label</code> (P1).</td></tr>
+    <tr><td>Labels non liés aux champs (Login)</td><td>1.3.1 / 3.3.2</td><td><code>htmlFor</code> + <code>id</code> (P1).</td></tr>
+    <tr><td>Toasts non annoncés</td><td>4.1.3</td><td>Région <code>aria-live</code> (P2).</td></tr>
+    <tr><td>Pas de lien d'évitement</td><td>2.4.1</td><td>« Aller au contenu » (P2).</td></tr>
+  </table>
+  <p class="small">Outillage d'audit recommandé : axe-core en CI, Lighthouse (objectif ≥ 90), test clavier + lecteur d'écran (NVDA/VoiceOver).</p>
+</div>
+
+<!-- 3. METRIQUES IA -->
+<div class="section">
+  <h2>3. Métriques de performance des modèles IA</h2>
+  <p>Deux familles : un modèle <strong>vision</strong> (LLaVA, mesurable en précision/rappel/F1) et des
+  modèles <strong>génératifs</strong> (Llama 3.2, évalués sur validité structurelle & conformité diététique).
+  Un <strong>harnais reproductible</strong> est fourni dans <code>ai_services/evaluation/</code>.</p>
+
+  <h3>Classification (reconnaissance d'image)</h3>
+  <ul>
+    <li><strong>Précision</strong> = VP/(VP+FP) ; <strong>Rappel</strong> = VP/(VP+FN) ; <strong>F1</strong> = moyenne harmonique.</li>
+    <li><strong>Macro</strong> = moyenne non pondérée par classe ; <strong>Micro</strong> = exactitude top-1 globale.</li>
+  </ul>
+  <p class="small">Protocole : jeu étiqueté <code>labels.csv</code> (image, classe, calories) →
+  <code>python evaluate_food_recognition.py --labels … --service-url http://localhost:8001</code> → <code>rapport_metrics.json</code>.</p>
+  <table>
+    <tr><th>Métrique</th><th>Référence (à recalculer)</th></tr>
+    <tr><td>Exactitude top-1 / F1 macro / F1 micro</td><td>mesurées via le harnais sur le jeu de validation réel</td></tr>
+  </table>
+
+  <h3>Estimation calorique (LLaVA + enrichissement)</h3>
+  <table>
+    <tr><th>Métrique</th><th>Définition</th><th>Cible</th></tr>
+    <tr><td>MAE</td><td>Erreur absolue moyenne (kcal)</td><td>&lt; 80 kcal</td></tr>
+    <tr><td>MAPE</td><td>Erreur relative moyenne (%)</td><td>&lt; 25 %</td></tr>
+    <tr><td>Taux ≤ ±20 %</td><td>Estimations dans la tolérance</td><td>&gt; 60 %</td></tr>
+  </table>
+
+  <h3>Modèles génératifs (Llama 3.2)</h3>
+  <ul>
+    <li><strong>Validité structurelle</strong> : % de réponses JSON conformes au schéma (couvert par les tests pytest, LLM mocké) — cible 100 %.</li>
+    <li><strong>Conformité diététique</strong> : écart calories du plan vs cible TDEE déterministe — cible &lt; 10 %.</li>
+  </ul>
+
+  <h3>Latence (journalisée dans <code>ailogs</code>)</h3>
+  <table>
+    <tr><th>Modèle</th><th>Tâche</th><th>Latence locale</th></tr>
+    <tr><td>LLaVA</td><td>Analyse d'image</td><td>60 s – 3 min</td></tr>
+    <tr><td>Llama 3.2</td><td>Génération texte</td><td>30 – 90 s</td></tr>
+    <tr><td>Déterministe</td><td>Calcul macros</td><td>&lt; 50 ms</td></tr>
+  </table>
+</div>
+
+<!-- 4. API IA & OPENAPI -->
+<div class="section">
+  <h2>4. API IA & documentation OpenAPI</h2>
+  <p>L'API IA est exposée <strong>via le backend Express</strong> (surface unique <code>/api/ai/*</code>,
+  protégée JWT, quota 60 req/h), qui proxie 4 microservices FastAPI. Spec <strong>OpenAPI 3.0</strong>
+  générée depuis le code (<code>backend/src/docs/swagger.ts</code>), exportée dans <code>docs/openapi.json</code>
+  (<code>npm run openapi:export</code>), UI interactive sur <code>/api-docs</code>.</p>
+
+  <h3>Endpoints IA</h3>
+  <table>
+    <tr><th>Méthode</th><th>Endpoint</th><th>Service</th><th>Modèle</th></tr>
+    <tr><td>POST</td><td>/api/ai/analyze-food-image</td><td>8001</td><td>LLaVA</td></tr>
+    <tr><td>GET</td><td>/api/ai/recipes/suggest?mealType=</td><td>8002</td><td>Llama 3.2</td></tr>
+    <tr><td>POST</td><td>/api/ai/recipes/generate</td><td>8002</td><td>Llama 3.2</td></tr>
+    <tr><td>GET</td><td>/api/ai/diet/macros</td><td>8003</td><td>déterministe</td></tr>
+    <tr><td>GET</td><td>/api/ai/diet/plan</td><td>8003</td><td>Llama 3.2</td></tr>
+    <tr><td>GET</td><td>/api/ai/diet/analyze?days=</td><td>8003</td><td>Llama 3.2</td></tr>
+    <tr><td>GET</td><td>/api/ai/training/program</td><td>8004</td><td>Llama 3.2</td></tr>
+    <tr><td>POST</td><td>/api/ai/training/quick-workout</td><td>8004</td><td>Llama 3.2</td></tr>
+    <tr><td>GET</td><td>/api/ai/history?type=&limit=</td><td>—</td><td>MongoDB</td></tr>
+  </table>
+
+  <h3>Technologies additionnelles (justification)</h3>
+  <table>
+    <tr><th>Techno</th><th>Rôle</th></tr>
+    <tr><td>FastAPI</td><td>Async natif (appels LLM longs), validation Pydantic, Swagger auto.</td></tr>
+    <tr><td>Ollama</td><td>Runtime LLM local, gratuit, souverain.</td></tr>
+    <tr><td>Motor / httpx</td><td>Accès MongoDB & HTTP non bloquants (async).</td></tr>
+    <tr><td>express-rate-limit</td><td>Quotas protégeant les ressources d'inférence.</td></tr>
+  </table>
+  <pre>POST /api/ai/diet/macros → { bmr:1780, tdee:2759, calories:2759,
+                             protein_g:150, carbs_g:344, fat_g:92 }</pre>
+</div>
+
+<!-- 5. MOTEUR DE RECOMMANDATION -->
+<div class="section">
+  <h2>5. Moteur de recommandation (microservices + NoSQL)</h2>
+  <p>4 microservices Python FastAPI <strong>séparés</strong> de l'application principale, produisant des
+  recommandations personnalisées et <strong>persistées en base NoSQL (MongoDB)</strong>. Couplage uniquement
+  par HTTP et par la base partagée — aucun code applicatif commun avec le backend.</p>
+  <table>
+    <tr><th>Service</th><th>Port</th><th>Modèle</th><th>Rôle</th></tr>
+    <tr><td>api1_food_recognition</td><td>8001</td><td>LLaVA</td><td>Analyse d'image + enrichissement OFF/USDA</td></tr>
+    <tr><td>api2_recipe_suggestions</td><td>8002</td><td>Llama 3.2</td><td>Suggestions / génération de recettes</td></tr>
+    <tr><td>api3_diet_plan</td><td>8003</td><td>Llama 3.2 + TDEE</td><td>Macros & plan diététique</td></tr>
+    <tr><td>api4_training_program</td><td>8004</td><td>Llama 3.2</td><td>Programmes & séances express</td></tr>
+  </table>
+
+  <h3>Pourquoi NoSQL</h3>
+  <p class="small">Les sorties IA sont <strong>hétérogènes</strong> (recette, plan, programme, analyse) : MongoDB
+  stocke ces documents JSON sans migration de schéma.</p>
+
+  <h3>Collections MongoDB</h3>
+  <table>
+    <tr><th>Collection</th><th>Contenu</th></tr>
+    <tr><td><code>recommendations</code></td><td>userId, type, prompt, content (JSON), aiModel, tokens, dates</td></tr>
+    <tr><td><code>ailogs</code></td><td>userId, requestId, service, status, input, output, error, latencyMs</td></tr>
+  </table>
+  <p class="small">Backend (Node) et microservices (Python) écrivent dans les <strong>mêmes collections</strong> de la base
+  <code>healthai</code>. URI Mongo forcée en IPv4 (127.0.0.1) pour éviter la résolution <code>::1</code> vers un conteneur distinct (Windows).
+  Sérialisation via <code>json.dumps(ensure_ascii=False)</code> → rendu structuré de l'historique côté front.</p>
+  <pre>Client ─JWT─▶ Backend /api/ai/* ─HTTP─▶ Microservice :
+  lit profil (PostgreSQL) → prompt personnalisé → Ollama (ou calcul déterministe)
+  → normalise/enrichit → persiste (MongoDB) → réponse normalisée</pre>
+</div>
+
+<!-- 6. MODELE DE DONNEES -->
+<div class="section">
+  <h2>6. Modèle de données relationnel & adaptations</h2>
+  <p>PostgreSQL (Prisma) pour le métier structuré ; MongoDB pour les sorties IA. Rattachement par <code>userId</code> (UUID).</p>
+  <table>
+    <tr><th>Table</th><th>Rôle</th><th>Points clés</th></tr>
+    <tr><td>User</td><td>Profil + identité</td><td>email unique ; champs santé optionnels ; dailyCalorieTarget</td></tr>
+    <tr><td>FoodEntry</td><td>Repas</td><td>calories + macros ; mealType (enum) ; index (userId, date)</td></tr>
+    <tr><td>ActivityEntry</td><td>Activités</td><td>duration, caloriesBurned, type ; index (userId, date)</td></tr>
+    <tr><td>GoalSettings</td><td>Objectifs</td><td>relation 1-1 ; cibles macros & séances</td></tr>
+    <tr><td>HealthMetric</td><td>Mesures corporelles</td><td>poids/IMC/masse grasse historisés</td></tr>
+    <tr><td>RefreshToken</td><td>Sessions JWT</td><td>rotation + révocation au logout</td></tr>
+  </table>
+  <p class="small"><strong>Intégrité :</strong> toutes les relations enfant en <code>onDelete: Cascade</code> →
+  suppression de compte = effacement complet (RGPD).</p>
+
+  <h3>Adaptations du modèle existant</h3>
+  <table>
+    <tr><th>Adaptation</th><th>Où</th><th>Motivation</th></tr>
+    <tr><td>Collections NoSQL recommendations & ailogs</td><td>MongoDB</td><td>Sorties IA au schéma variable sans migration.</td></tr>
+    <tr><td>dailyCalorieTarget = limite calorique</td><td>PostgreSQL</td><td>Recalculé dynamiquement (Mifflin-St Jeor).</td></tr>
+    <tr><td>Objectif calories brûlées (localStorage)</td><td>Frontend</td><td>Donnée d'affichage dérivée du BMR ; évite une migration.</td></tr>
+    <tr><td>Champs santé User optionnels</td><td>PostgreSQL</td><td>Inscription puis onboarding progressif.</td></tr>
+    <tr><td>aiModel / tokens / nutrition_basis</td><td>MongoDB</td><td>Traçabilité du modèle, coût et source des valeurs.</td></tr>
+  </table>
+</div>
+
+<!-- 7-8 TESTS & CONDUITE -->
+<div class="section">
+  <h2>7. Tests automatisés & couverture</h2>
+  <table>
+    <tr><th>Périmètre</th><th>Framework</th><th>Statut</th></tr>
+    <tr><td>Backend (services critiques)</td><td>Jest + Supertest</td><td>✔ En place (auth, food, activity)</td></tr>
+    <tr><td>Microservices IA (moteur de reco)</td><td>Pytest + mocks (~136 tests)</td><td>✔ En place</td></tr>
+    <tr><td>Frontend (UI)</td><td>Vitest + Testing Library</td><td>⚙ Setup fourni, à implémenter</td></tr>
+  </table>
+  <p class="small">Couverture : backend <code>npm run test:coverage</code> → <code>coverage/lcov-report</code> ;
+  microservices <code>pytest --cov --cov-report=html</code> → <code>htmlcov/</code>. Les tests IA mockent
+  Ollama/OFF/USDA/MongoDB (déterministes, sans réseau). CI recommandée : lint → tests back → tests IA → tests front → build → publication LCOV.</p>
+  <p class="small"><strong>Cibles UI prioritaires :</strong> logique pure <code>mappers.ts</code> (objectifs caloriques),
+  <code>Login</code>, <code>FoodLog</code> (analyse photo mockée), <code>Coach</code> (historique), <code>AppContext</code>.</p>
+
+  <h2 style="margin-top:18px">8. Conduite du changement & adoption</h2>
+  <p class="small"><strong>Personas :</strong> grand public, sportif, développeur/partenaire, data scientist, product manager,
+  personne en situation de handicap — chacun adressé (parcours guidé, OpenAPI, harnais d'éval, métriques, base accessible).</p>
+  <ul class="small">
+    <li><strong>Accessibilité = levier d'adoption</strong> : backlog priorisé effort/impact (aria-label & labels P1).</li>
+    <li><strong>Documentation multi-niveaux</strong> (utilisateur, technique, démarrage reproductible) + utilisateur de démo (seed).</li>
+    <li><strong>Déploiement progressif</strong> : bêta interne → itération → ouverture ; boucle de feedback via <code>ailogs</code>.</li>
+    <li><strong>Éthique & conformité</strong> : IA locale (souveraineté), RGPD (effacement en cascade), traçabilité du modèle.</li>
+    <li><strong>Indicateurs</strong> : complétion onboarding, reco/utilisateur, latence/erreurs IA, score Lighthouse ≥ 90, rétention 7/30 j.</li>
+  </ul>
+</div>
+
+<!-- 9. MAQUETTES -->
+<div class="section">
+  <h2>9. Maquettes d'interface responsive</h2>
+  <h3>Système de design & breakpoints</h3>
+  <p class="small">Primaire Emerald <code>#10b981</code>, accent Orange <code>#f97316</code>, neutres Slate, thèmes clair/sombre.
+  Composants : Button, Input, Select, Card, ProgressBar, Slider. Icônes lucide-react.</p>
+  <table>
+    <tr><th>Breakpoint</th><th>Largeur</th><th>Comportement</th></tr>
+    <tr><td>Mobile</td><td>&lt; 640 px</td><td>1 colonne, navigation basse fixe</td></tr>
+    <tr><td>md</td><td>≥ 768 px</td><td>grilles 2 colonnes partielles</td></tr>
+    <tr><td>lg</td><td>≥ 1024 px</td><td>barre latérale, tableau de bord 2 colonnes</td></tr>
+  </table>
+  <h3>Écrans</h3>
+  <div class="grid2">
+    <div class="box small"><strong>Login</strong><br>Carte centrée : e-mail, mot de passe (œil), bascule connexion/inscription.</div>
+    <div class="box small"><strong>Onboarding</strong><br>3 étapes (profil, mensurations, objectif) + barre de progression.</div>
+    <div class="box small"><strong>Dashboard</strong><br>Calories (consommées/limite), brûlées/objectif, minutes actives, séances, IMC, graphe semaine.</div>
+    <div class="box small"><strong>Journal alimentaire</strong><br>Ajout rapide, photo repas IA, repas groupés par type.</div>
+    <div class="box small"><strong>Coach IA</strong><br>Onglets Recettes / Diète / Sport / Historique, cartes structurées.</div>
+    <div class="box small"><strong>Profil</strong><br>Données, objectif, calcul IA, stats, thème, déconnexion, suppression compte.</div>
+  </div>
+  <pre>MOBILE                          DESKTOP ≥ lg
+┌───────────────┐               ┌─────────┬───────────────────┐
+│ Bonjour … 💪  │               │ Sidebar │ Bonjour … 💪      │
+│ Calories ▰▰▱  │               │ Accueil │ Calories (2 col.) │
+│ Brûlées ▰▱▱   │               │ Repas   │ Actif | Séances   │
+│ Graphe semaine│               │ Coach   │ Objectif | IMC    │
+│[Accueil][Repas│               │ Profil  │ Graphe semaine    │
+│ …][Profil]    │               │ 🌙 thème│                   │
+└───────────────┘               └─────────┴───────────────────┘</pre>
+  <p class="small muted">Les tokens de design sont dérivables du code Tailwind → cohérence maquette ↔ implémentation.
+  Captures réelles : <code>npm run dev</code> puis export en vues 375 px (mobile) et 1440 px (desktop).</p>
+</div>
+
+</body>
+</html>

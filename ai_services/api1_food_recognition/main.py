@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 from routes.food_recognition import router as food_router
 
 
@@ -24,6 +25,9 @@ app = FastAPI(
 )
 
 app.include_router(food_router, prefix="/api/v1/food", tags=["Food Recognition"])
+
+# Expose les métriques Prometheus sur /metrics
+Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/health")

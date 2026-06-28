@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import swaggerUi from 'swagger-ui-express';
 
 import { requestLogger } from './middlewares/logger.middleware';
+import { metricsMiddleware, metricsHandler } from './middlewares/metrics.middleware';
 import { errorMiddleware } from './middlewares/error.middleware';
 import { sendSuccess, sendError } from './utils/response.utils';
 import apiRoutes from './routes';
@@ -29,6 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // ── Logging ───────────────────────────────────────────────────────────────────
 app.use(requestLogger);
+
+// ── Métriques Prometheus ──────────────────────────────────────────────────────
+app.use(metricsMiddleware);
+// Endpoint scrappé par Prometheus (défini avant le rate limit pour ne pas être throttlé).
+app.get('/metrics', metricsHandler);
 
 // ── Global rate limit ─────────────────────────────────────────────────────────
 app.use(rateLimit({

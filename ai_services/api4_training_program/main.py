@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 from routes.training import router as training_router
 
 
@@ -24,6 +25,9 @@ app = FastAPI(
 )
 
 app.include_router(training_router, prefix="/api/v4/training", tags=["Training Program"])
+
+# Expose les métriques Prometheus sur /metrics
+Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/health")

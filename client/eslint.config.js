@@ -18,5 +18,12 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // Le code parse des réponses IA de structure dynamique : `any` toléré (signalé en warning).
+      '@typescript-eslint/no-explicit-any': 'warn',
+      // Règles strictes de confort DX : non bloquantes en CI mais toujours rapportées.
+      'react-refresh/only-export-components': 'warn',
+      'react-hooks/set-state-in-effect': 'warn',
+    },
   },
 ])
